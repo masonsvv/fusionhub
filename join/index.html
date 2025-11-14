@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Joining Roblox Server...</title>
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 80px;
+        }
+        a {
+            color: #4aa3ff;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function getParam(param) {
+            return new URLSearchParams(window.location.search).get(param);
+        }
+
+        window.onload = function() {
+            const placeId = getParam("placeId");
+            const jobId = getParam("jobId");
+
+            if (!placeId || !jobId) {
+                document.body.innerHTML = "<h2>Missing placeId or jobId.</h2>";
+                return;
+            }
+
+            const roblox_url = `roblox://placeID=${placeId}&gameInstanceId=${jobId}`;
+
+            // Attempt auto-open:
+            window.location = roblox_url;
+
+            document.body.innerHTML = `
+                <h1>Launching Roblox...</h1>
+                <p>If nothing happens, <a href="${roblox_url}">Click Here</a> to join manually.</p>
+                <p>Server ID:</p>
+                <code style="font-size:18px;">${jobId}</code>
+            `;
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
